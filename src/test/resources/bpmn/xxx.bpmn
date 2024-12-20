@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="1">
+  <process id="openerp_protocol_purchase_add" name="采购合同新增" isExecutable="true">
+    <startEvent id="start">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+    </startEvent>
+    <exclusiveGateway id="getWay1"></exclusiveGateway>
+    <userTask id="user_task1" name="宋金正" activiti:candidateUsers="${user_1008678}"></userTask>
+    <inclusiveGateway id="inclusive1"></inclusiveGateway>
+    <parallelGateway id="parallel1"></parallelGateway>
+    <userTask id="user_task2" name="申瑜琼" activiti:assignee="${assignee}">
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="1009040_user_task2_list" activiti:elementVariable="assignee">
+        <completionCondition>${user_task2_all == user_task2_done}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="sequenceFlow-f4eb608e-efe3-4e0c-8cf1-9c2431c50409" sourceRef="inclusive1" targetRef="user_task2"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-19f1cc39-4abb-44f0-ac4d-49eb1ece6227" sourceRef="user_task2" targetRef="parallel1"></sequenceFlow>
+    <userTask id="user_task3" name="杨建财" activiti:assignee="${assignee}">
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="1001768_user_task3_list" activiti:elementVariable="assignee">
+        <completionCondition>${user_task3_all == user_task3_done}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="sequenceFlow-95af97f3-46d7-4ede-8060-ed09dda3fa9d" sourceRef="inclusive1" targetRef="user_task3"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-30cc8fd0-5881-4fda-b408-bab1be8872e9" sourceRef="user_task3" targetRef="parallel1"></sequenceFlow>
+    <userTask id="user_task4" name="刘晓宁" activiti:assignee="${assignee}">
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="1008672_user_task4_list" activiti:elementVariable="assignee">
+        <completionCondition>${user_task4_all == user_task4_done}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="sequenceFlow-5234e8f3-a091-4169-b858-86a0bbb024e3" sourceRef="inclusive1" targetRef="user_task4"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-3df7e073-1025-4a59-b2af-097af7ebb428" sourceRef="user_task4" targetRef="parallel1"></sequenceFlow>
+    <userTask id="user_task5" name="郭蕾蕾" activiti:assignee="${assignee}">
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="1009033_user_task5_list" activiti:elementVariable="assignee">
+        <completionCondition>${user_task5_all == user_task5_done}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="sequenceFlow-4cba3640-94eb-4d62-935d-4a6410b648fc" sourceRef="inclusive1" targetRef="user_task5"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-340a0b56-a281-4204-8b97-92f35fcbfa7f" sourceRef="user_task5" targetRef="parallel1"></sequenceFlow>
+    <userTask id="user_task6" name="宋金正" activiti:candidateUsers="${user_1008678}"></userTask>
+    <exclusiveGateway id="getWay2"></exclusiveGateway>
+    <endEvent id="end">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccUserId">
+            <activiti:string><![CDATA[1008678,1009055]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+    </endEvent>
+    <exclusiveGateway id="getWay3"></exclusiveGateway>
+    <userTask id="user_task7" name="吴杰" activiti:candidateUsers="${user_1008666}"></userTask>
+    <userTask id="user_task8" name="刘建伟" activiti:candidateUsers="${user_1009002}"></userTask>
+    <sequenceFlow id="sequenceFlow-3608b4c7-7cfc-4490-8bba-a91419753b97" sourceRef="user_task7" targetRef="user_task8">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task9" name="吴健" activiti:candidateUsers="${user_1008739}"></userTask>
+    <sequenceFlow id="sequenceFlow-c69b6b67-ff0e-4446-831d-935b33ae1281" sourceRef="getWay3" targetRef="user_task9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==16487)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-7212f44a-516a-4f37-91f6-4c88374dcb60" sourceRef="user_task9" targetRef="user_task7">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="auto_taskuser_task10" name="自动通过" activiti:candidateUsers="${auto_task}"></userTask>
+    <sequenceFlow id="sequenceFlow-127d953c-9e94-459c-8150-54e7edc0fe70" sourceRef="getWay3" targetRef="auto_taskuser_task10">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!((departmentId==16487))}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-a80960a9-4a05-42e7-a2bd-66f8d30cd240" sourceRef="auto_taskuser_task10" targetRef="user_task7">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-0cf9c71e-050a-4eb7-9f12-6c30c805c32e" sourceRef="getWay2" targetRef="getWay3">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(businessRiskLevel=="二级")}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-9645831e-3052-40a7-8ffa-2c7763b138b5" sourceRef="user_task8" targetRef="end">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="getWay4"></exclusiveGateway>
+    <userTask id="user_task11" name="吴杰" activiti:candidateUsers="${user_1008666}"></userTask>
+    <userTask id="user_task12" name="刘建伟" activiti:candidateUsers="${user_1009002}"></userTask>
+    <sequenceFlow id="sequenceFlow-2ecc8629-e0c2-4654-aefe-fdcc6f505356" sourceRef="user_task11" targetRef="user_task12">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task13" name="吴健" activiti:candidateUsers="${user_1008739}"></userTask>
+    <sequenceFlow id="sequenceFlow-c75e396c-61db-485e-bbb8-08f9f1e0b994" sourceRef="getWay4" targetRef="user_task13">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==16487)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-f1cb4f2f-6ed5-47a6-b321-3a8207712658" sourceRef="user_task13" targetRef="user_task11">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="auto_taskuser_task14" name="自动通过" activiti:candidateUsers="${auto_task}"></userTask>
+    <sequenceFlow id="sequenceFlow-a121131e-f6bf-4715-9c87-758150890163" sourceRef="getWay4" targetRef="auto_taskuser_task14">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!((departmentId==16487))}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-12b30a72-e2a1-4dca-b933-b5bf0f3802ae" sourceRef="auto_taskuser_task14" targetRef="user_task11">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-8776fcce-5e2a-4281-a487-a838df95bd33" sourceRef="getWay2" targetRef="getWay4">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(businessRiskLevel=="一级")}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-e9a67861-ed3c-4ffb-85b1-5b4e242cd3d5" sourceRef="user_task12" targetRef="end">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task15" name="于晓阳" activiti:candidateUsers="${user_1005150}"></userTask>
+    <sequenceFlow id="sequenceFlow-ec8d44c7-4162-4c45-82c2-3a2a2f387085" sourceRef="getWay2" targetRef="user_task15">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!((businessRiskLevel=="二级"))&&!((businessRiskLevel=="一级"))}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-54758adb-5db8-49e2-b74c-6bf78ff7f442" sourceRef="user_task15" targetRef="end">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-39083565-144e-4edd-b44e-9d3fa9a792e3" sourceRef="user_task6" targetRef="getWay2">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-36c1b219-1b5c-4b3a-a02c-77b6e81de48d" sourceRef="parallel1" targetRef="user_task6">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-6dc1fb8f-6e39-401a-b1f9-1960d4db11c4" sourceRef="user_task1" targetRef="inclusive1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task16" name="张雪松" activiti:candidateUsers="${user_1008755}"></userTask>
+    <userTask id="user_task17" name="刘全红" activiti:candidateUsers="${user_1008688}"></userTask>
+    <sequenceFlow id="sequenceFlow-6c5caafa-e580-4697-a101-0cb68a5376df" sourceRef="user_task16" targetRef="user_task17">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-7670dc4f-8631-4925-9096-396339a06f0d" sourceRef="getWay1" targetRef="user_task16">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==15680||departmentId==15681||departmentId==15684||departmentId==15685||departmentId==15687||departmentId==15689||departmentId==15690||departmentId==15692)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-3852a742-96a6-4317-a80a-d9302f3cd47b" sourceRef="user_task17" targetRef="user_task1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task18" name="郭淦" activiti:candidateUsers="${user_1008728}"></userTask>
+    <userTask id="user_task19" name="杨建财" activiti:candidateUsers="${user_1001768}"></userTask>
+    <sequenceFlow id="sequenceFlow-bb82af14-516b-4b5f-8676-b70ff5a47d82" sourceRef="user_task18" targetRef="user_task19">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-5960bab7-461c-4419-a25e-f7622d2e6607" sourceRef="getWay1" targetRef="user_task18">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==15686)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-b9a1e7b2-4382-424c-86ce-872b0d6d6896" sourceRef="user_task19" targetRef="user_task1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task20" name="晋国鹏" activiti:candidateUsers="${user_1008729}"></userTask>
+    <userTask id="user_task21" name="景单飞" activiti:candidateUsers="${user_1009008}"></userTask>
+    <sequenceFlow id="sequenceFlow-e131face-fc8f-409b-8741-6983a903c6e8" sourceRef="user_task20" targetRef="user_task21">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-61ed90b7-9c3b-4199-a48b-6fbb4b30f10d" sourceRef="getWay1" targetRef="user_task20">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==15693||departmentId==16334)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-1c30436d-0f62-4da4-8fd1-a441bf03b5f8" sourceRef="user_task21" targetRef="user_task1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task22" name="王炜华" activiti:candidateUsers="${user_1008955}"></userTask>
+    <sequenceFlow id="sequenceFlow-667a0520-949f-4601-a2ad-7b7453c3d628" sourceRef="getWay1" targetRef="user_task22">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==16326)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-990ac326-27a0-4619-bd1b-edfa19ac86ca" sourceRef="user_task22" targetRef="user_task1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task23" name="刘晓强" activiti:candidateUsers="${user_1009011}"></userTask>
+    <sequenceFlow id="sequenceFlow-6b8fb604-d373-4c80-bfe5-7ceb96e90551" sourceRef="getWay1" targetRef="user_task23">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==16398)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-378c2760-0678-439f-a58f-dd9b2745aa1d" sourceRef="user_task23" targetRef="user_task1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task24" name="张鸿" activiti:candidateUsers="${user_1009047}"></userTask>
+    <sequenceFlow id="sequenceFlow-9597a72e-9090-4236-bb63-e06872239dfe" sourceRef="getWay1" targetRef="user_task24">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(departmentId==16487)}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-ecce7e72-44f8-4262-8202-158950ba0b5e" sourceRef="user_task24" targetRef="user_task1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="user_task25" name="于晓阳" activiti:candidateUsers="${user_1005150}"></userTask>
+    <sequenceFlow id="sequenceFlow-605f7a44-2876-45e5-93fb-9e80708e4aae" sourceRef="getWay1" targetRef="user_task25">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!((departmentId==15680||departmentId==15681||departmentId==15684||departmentId==15685||departmentId==15687||departmentId==15689||departmentId==15690||departmentId==15692))&&!((departmentId==15686))&&!((departmentId==15693||departmentId==16334))&&!((departmentId==16326))&&!((departmentId==16398))&&!((departmentId==16487))}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-d22e65c4-6067-4318-ae89-307a005aef34" sourceRef="user_task25" targetRef="user_task1">
+      <extensionElements>
+        <activiti:executionListener event="end" delegateExpression="${CCListener}">
+          <activiti:field name="ccApplyer">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="ccAuditor">
+            <activiti:string><![CDATA[0]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow-355fbd69-d786-43d0-9d61-41da5a55d6dc" sourceRef="start" targetRef="getWay1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_openerp_protocol_purchase_add">
+    <bpmndi:BPMNPlane bpmnElement="openerp_protocol_purchase_add" id="BPMNPlane_openerp_protocol_purchase_add">
+      <bpmndi:BPMNShape bpmnElement="user_task1" id="BPMNShape_user_task1">
+        <omgdc:Bounds height="60.0" width="100.0" x="470.0" y="427.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task21" id="BPMNShape_user_task21">
+        <omgdc:Bounds height="60.0" width="100.0" x="320.0" y="420.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task2" id="BPMNShape_user_task2">
+        <omgdc:Bounds height="60.0" width="100.0" x="710.0" y="560.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task22" id="BPMNShape_user_task22">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task3" id="BPMNShape_user_task3">
+        <omgdc:Bounds height="60.0" width="100.0" x="710.0" y="720.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task23" id="BPMNShape_user_task23">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="640.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task4" id="BPMNShape_user_task4">
+        <omgdc:Bounds height="60.0" width="100.0" x="710.0" y="240.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task24" id="BPMNShape_user_task24">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="320.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task5" id="BPMNShape_user_task5">
+        <omgdc:Bounds height="60.0" width="100.0" x="710.0" y="400.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task25" id="BPMNShape_user_task25">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task6" id="BPMNShape_user_task6">
+        <omgdc:Bounds height="60.0" width="100.0" x="950.0" y="485.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task7" id="BPMNShape_user_task7">
+        <omgdc:Bounds height="60.0" width="100.0" x="1490.0" y="510.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task8" id="BPMNShape_user_task8">
+        <omgdc:Bounds height="60.0" width="100.0" x="1640.0" y="510.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task20" id="BPMNShape_user_task20">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="480.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task18" id="BPMNShape_user_task18">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="960.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task19" id="BPMNShape_user_task19">
+        <omgdc:Bounds height="60.0" width="100.0" x="320.0" y="840.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="BPMNShape_end">
+        <omgdc:Bounds height="30.0" width="30.0" x="1790.0" y="525.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="getWay3" id="BPMNShape_getWay3">
+        <omgdc:Bounds height="40.0" width="40.0" x="1220.0" y="503.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="getWay4" id="BPMNShape_getWay4">
+        <omgdc:Bounds height="40.0" width="40.0" x="1220.0" y="352.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="getWay1" id="BPMNShape_getWay1">
+        <omgdc:Bounds height="40.0" width="40.0" x="80.0" y="490.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="getWay2" id="BPMNShape_getWay2">
+        <omgdc:Bounds height="40.0" width="40.0" x="1100.0" y="500.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task11" id="BPMNShape_user_task11">
+        <omgdc:Bounds height="60.0" width="100.0" x="1490.0" y="296.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task12" id="BPMNShape_user_task12">
+        <omgdc:Bounds height="60.0" width="100.0" x="1640.0" y="350.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task13" id="BPMNShape_user_task13">
+        <omgdc:Bounds height="60.0" width="100.0" x="1340.0" y="350.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task15" id="BPMNShape_user_task15">
+        <omgdc:Bounds height="60.0" width="100.0" x="1190.0" y="645.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task16" id="BPMNShape_user_task16">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="800.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task17" id="BPMNShape_user_task17">
+        <omgdc:Bounds height="60.0" width="100.0" x="320.0" y="680.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="30.0" width="30.0" x="0.0" y="495.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="inclusive1" id="BPMNShape_inclusive1">
+        <omgdc:Bounds height="40.0" width="40.0" x="620.0" y="479.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user_task9" id="BPMNShape_user_task9">
+        <omgdc:Bounds height="60.0" width="100.0" x="1340.0" y="510.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallel1" id="BPMNShape_parallel1">
+        <omgdc:Bounds height="40.0" width="40.0" x="860.0" y="490.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="auto_taskuser_task14" id="BPMNShape_auto_taskuser_task14">
+        <omgdc:Bounds height="60.0" width="100.0" x="1340.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="auto_taskuser_task10" id="BPMNShape_auto_taskuser_task10">
+        <omgdc:Bounds height="60.0" width="100.0" x="1340.0" y="670.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-5234e8f3-a091-4169-b858-86a0bbb024e3" id="BPMNEdge_sequenceFlow-5234e8f3-a091-4169-b858-86a0bbb024e3">
+        <omgdi:waypoint x="660.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="672.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="672.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="710.0" y="270.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-4cba3640-94eb-4d62-935d-4a6410b648fc" id="BPMNEdge_sequenceFlow-4cba3640-94eb-4d62-935d-4a6410b648fc">
+        <omgdi:waypoint x="660.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="674.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="674.0" y="430.0"></omgdi:waypoint>
+        <omgdi:waypoint x="710.0" y="430.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-355fbd69-d786-43d0-9d61-41da5a55d6dc" id="BPMNEdge_sequenceFlow-355fbd69-d786-43d0-9d61-41da5a55d6dc">
+        <omgdi:waypoint x="30.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="80.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-667a0520-949f-4601-a2ad-7b7453c3d628" id="BPMNEdge_sequenceFlow-667a0520-949f-4601-a2ad-7b7453c3d628">
+        <omgdi:waypoint x="120.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="30.000000000000007"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="30.000000000000007"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-605f7a44-2876-45e5-93fb-9e80708e4aae" id="BPMNEdge_sequenceFlow-605f7a44-2876-45e5-93fb-9e80708e4aae">
+        <omgdi:waypoint x="120.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="134.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="134.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="190.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-a121131e-f6bf-4715-9c87-758150890163" id="BPMNEdge_sequenceFlow-a121131e-f6bf-4715-9c87-758150890163">
+        <omgdi:waypoint x="1260.0" y="372.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="372.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1340.0" y="220.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-990ac326-27a0-4619-bd1b-edfa19ac86ca" id="BPMNEdge_sequenceFlow-990ac326-27a0-4619-bd1b-edfa19ac86ca">
+        <omgdi:waypoint x="270.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-3852a742-96a6-4317-a80a-d9302f3cd47b" id="BPMNEdge_sequenceFlow-3852a742-96a6-4317-a80a-d9302f3cd47b">
+        <omgdi:waypoint x="420.0" y="710.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="710.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-9597a72e-9090-4236-bb63-e06872239dfe" id="BPMNEdge_sequenceFlow-9597a72e-9090-4236-bb63-e06872239dfe">
+        <omgdi:waypoint x="120.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="136.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="136.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="350.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-ecce7e72-44f8-4262-8202-158950ba0b5e" id="BPMNEdge_sequenceFlow-ecce7e72-44f8-4262-8202-158950ba0b5e">
+        <omgdi:waypoint x="270.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-39083565-144e-4edd-b44e-9d3fa9a792e3" id="BPMNEdge_sequenceFlow-39083565-144e-4edd-b44e-9d3fa9a792e3">
+        <omgdi:waypoint x="1050.0" y="515.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1062.0" y="515.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1062.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1100.0" y="520.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-c69b6b67-ff0e-4446-831d-935b33ae1281" id="BPMNEdge_sequenceFlow-c69b6b67-ff0e-4446-831d-935b33ae1281">
+        <omgdi:waypoint x="1260.0" y="523.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="523.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1340.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-8776fcce-5e2a-4281-a487-a838df95bd33" id="BPMNEdge_sequenceFlow-8776fcce-5e2a-4281-a487-a838df95bd33">
+        <omgdi:waypoint x="1140.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1152.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1152.0" y="372.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1220.0" y="372.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-b9a1e7b2-4382-424c-86ce-872b0d6d6896" id="BPMNEdge_sequenceFlow-b9a1e7b2-4382-424c-86ce-872b0d6d6896">
+        <omgdi:waypoint x="420.0" y="870.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="870.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-1c30436d-0f62-4da4-8fd1-a441bf03b5f8" id="BPMNEdge_sequenceFlow-1c30436d-0f62-4da4-8fd1-a441bf03b5f8">
+        <omgdi:waypoint x="420.0" y="450.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="450.0"></omgdi:waypoint>
+        <omgdi:waypoint x="432.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-7212f44a-516a-4f37-91f6-4c88374dcb60" id="BPMNEdge_sequenceFlow-7212f44a-516a-4f37-91f6-4c88374dcb60">
+        <omgdi:waypoint x="1440.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1490.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-340a0b56-a281-4204-8b97-92f35fcbfa7f" id="BPMNEdge_sequenceFlow-340a0b56-a281-4204-8b97-92f35fcbfa7f">
+        <omgdi:waypoint x="810.0" y="430.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="430.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="860.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-3df7e073-1025-4a59-b2af-097af7ebb428" id="BPMNEdge_sequenceFlow-3df7e073-1025-4a59-b2af-097af7ebb428">
+        <omgdi:waypoint x="810.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="860.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-12b30a72-e2a1-4dca-b933-b5bf0f3802ae" id="BPMNEdge_sequenceFlow-12b30a72-e2a1-4dca-b933-b5bf0f3802ae">
+        <omgdi:waypoint x="1440.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1452.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1452.0" y="326.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1490.0" y="326.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-36c1b219-1b5c-4b3a-a02c-77b6e81de48d" id="BPMNEdge_sequenceFlow-36c1b219-1b5c-4b3a-a02c-77b6e81de48d">
+        <omgdi:waypoint x="900.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="912.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="912.0" y="515.0"></omgdi:waypoint>
+        <omgdi:waypoint x="950.0" y="515.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-f4eb608e-efe3-4e0c-8cf1-9c2431c50409" id="BPMNEdge_sequenceFlow-f4eb608e-efe3-4e0c-8cf1-9c2431c50409">
+        <omgdi:waypoint x="660.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="674.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="674.0" y="590.0"></omgdi:waypoint>
+        <omgdi:waypoint x="710.0" y="590.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-f1cb4f2f-6ed5-47a6-b321-3a8207712658" id="BPMNEdge_sequenceFlow-f1cb4f2f-6ed5-47a6-b321-3a8207712658">
+        <omgdi:waypoint x="1440.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1452.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1452.0" y="326.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1490.0" y="326.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-0cf9c71e-050a-4eb7-9f12-6c30c805c32e" id="BPMNEdge_sequenceFlow-0cf9c71e-050a-4eb7-9f12-6c30c805c32e">
+        <omgdi:waypoint x="1140.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1154.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1154.0" y="523.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1220.0" y="523.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-61ed90b7-9c3b-4199-a48b-6fbb4b30f10d" id="BPMNEdge_sequenceFlow-61ed90b7-9c3b-4199-a48b-6fbb4b30f10d">
+        <omgdi:waypoint x="120.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-95af97f3-46d7-4ede-8060-ed09dda3fa9d" id="BPMNEdge_sequenceFlow-95af97f3-46d7-4ede-8060-ed09dda3fa9d">
+        <omgdi:waypoint x="660.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="672.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="672.0" y="750.0"></omgdi:waypoint>
+        <omgdi:waypoint x="710.0" y="750.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-bb82af14-516b-4b5f-8676-b70ff5a47d82" id="BPMNEdge_sequenceFlow-bb82af14-516b-4b5f-8676-b70ff5a47d82">
+        <omgdi:waypoint x="270.0" y="990.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="990.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="870.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="870.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-d22e65c4-6067-4318-ae89-307a005aef34" id="BPMNEdge_sequenceFlow-d22e65c4-6067-4318-ae89-307a005aef34">
+        <omgdi:waypoint x="270.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-19f1cc39-4abb-44f0-ac4d-49eb1ece6227" id="BPMNEdge_sequenceFlow-19f1cc39-4abb-44f0-ac4d-49eb1ece6227">
+        <omgdi:waypoint x="810.0" y="590.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="590.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="860.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-30cc8fd0-5881-4fda-b408-bab1be8872e9" id="BPMNEdge_sequenceFlow-30cc8fd0-5881-4fda-b408-bab1be8872e9">
+        <omgdi:waypoint x="810.0" y="750.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="750.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="860.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-127d953c-9e94-459c-8150-54e7edc0fe70" id="BPMNEdge_sequenceFlow-127d953c-9e94-459c-8150-54e7edc0fe70">
+        <omgdi:waypoint x="1260.0" y="523.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="523.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="700.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1340.0" y="700.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-6b8fb604-d373-4c80-bfe5-7ceb96e90551" id="BPMNEdge_sequenceFlow-6b8fb604-d373-4c80-bfe5-7ceb96e90551">
+        <omgdi:waypoint x="120.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="136.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="136.0" y="670.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="670.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-a80960a9-4a05-42e7-a2bd-66f8d30cd240" id="BPMNEdge_sequenceFlow-a80960a9-4a05-42e7-a2bd-66f8d30cd240">
+        <omgdi:waypoint x="1440.0" y="700.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1452.0" y="700.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1452.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1490.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-c75e396c-61db-485e-bbb8-08f9f1e0b994" id="BPMNEdge_sequenceFlow-c75e396c-61db-485e-bbb8-08f9f1e0b994">
+        <omgdi:waypoint x="1260.0" y="372.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="372.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1340.0" y="380.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-e131face-fc8f-409b-8741-6983a903c6e8" id="BPMNEdge_sequenceFlow-e131face-fc8f-409b-8741-6983a903c6e8">
+        <omgdi:waypoint x="270.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="450.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="450.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-378c2760-0678-439f-a58f-dd9b2745aa1d" id="BPMNEdge_sequenceFlow-378c2760-0678-439f-a58f-dd9b2745aa1d">
+        <omgdi:waypoint x="270.0" y="670.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="670.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="457.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-2ecc8629-e0c2-4654-aefe-fdcc6f505356" id="BPMNEdge_sequenceFlow-2ecc8629-e0c2-4654-aefe-fdcc6f505356">
+        <omgdi:waypoint x="1590.0" y="326.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1602.0" y="326.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1602.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1640.0" y="380.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-54758adb-5db8-49e2-b74c-6bf78ff7f442" id="BPMNEdge_sequenceFlow-54758adb-5db8-49e2-b74c-6bf78ff7f442">
+        <omgdi:waypoint x="1290.0" y="675.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="675.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1302.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1790.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-ec8d44c7-4162-4c45-82c2-3a2a2f387085" id="BPMNEdge_sequenceFlow-ec8d44c7-4162-4c45-82c2-3a2a2f387085">
+        <omgdi:waypoint x="1140.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1152.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1152.0" y="675.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1190.0" y="675.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-3608b4c7-7cfc-4490-8bba-a91419753b97" id="BPMNEdge_sequenceFlow-3608b4c7-7cfc-4490-8bba-a91419753b97">
+        <omgdi:waypoint x="1590.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1640.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-6dc1fb8f-6e39-401a-b1f9-1960d4db11c4" id="BPMNEdge_sequenceFlow-6dc1fb8f-6e39-401a-b1f9-1960d4db11c4">
+        <omgdi:waypoint x="570.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="582.0" y="457.0"></omgdi:waypoint>
+        <omgdi:waypoint x="582.0" y="499.0"></omgdi:waypoint>
+        <omgdi:waypoint x="620.0" y="499.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-7670dc4f-8631-4925-9096-396339a06f0d" id="BPMNEdge_sequenceFlow-7670dc4f-8631-4925-9096-396339a06f0d">
+        <omgdi:waypoint x="120.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="134.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="134.0" y="830.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="830.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-5960bab7-461c-4419-a25e-f7622d2e6607" id="BPMNEdge_sequenceFlow-5960bab7-461c-4419-a25e-f7622d2e6607">
+        <omgdi:waypoint x="120.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="990.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="990.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-9645831e-3052-40a7-8ffa-2c7763b138b5" id="BPMNEdge_sequenceFlow-9645831e-3052-40a7-8ffa-2c7763b138b5">
+        <omgdi:waypoint x="1740.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1790.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-e9a67861-ed3c-4ffb-85b1-5b4e242cd3d5" id="BPMNEdge_sequenceFlow-e9a67861-ed3c-4ffb-85b1-5b4e242cd3d5">
+        <omgdi:waypoint x="1740.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1752.0" y="380.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1752.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1790.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-6c5caafa-e580-4697-a101-0cb68a5376df" id="BPMNEdge_sequenceFlow-6c5caafa-e580-4697-a101-0cb68a5376df">
+        <omgdi:waypoint x="270.0" y="830.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="830.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="710.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="710.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="myProcess" isExecutable="true">
+    <startEvent id="start"></startEvent>
+    <userTask id="usertask" name="User Task" activiti:assignee="10011" 自定义的属性="属性值">
+      <extensionElements>
+        <activiti:formProperty id="approveNode" name="发起阶段" default="-1"></activiti:formProperty>
+        <activiti:sadfsd><![CDATA[bbb]]></activiti:sadfsd>
+        <activiti:taskListener event="start" delegateExpression="${xxx}"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <inclusiveGateway id="655f8412-c8a5-4134-bc0a-f3120851e7be"></inclusiveGateway>
+    <sequenceFlow id="17a8a5f7-1353-44c6-b0c2-2ad94911efd4" name="xx" sourceRef="start" targetRef="655f8412-c8a5-4134-bc0a-f3120851e7be">
+      <documentation>这是一个连线描述</documentation>
+    </sequenceFlow>
+    <userTask id="usertask2" name="User Task2" activiti:assignee="10013"></userTask>
+    <sequenceFlow id="b218ee66-13c9-4414-a577-d206e4a3b8e9" name="a &gt; 3" sourceRef="655f8412-c8a5-4134-bc0a-f3120851e7be" targetRef="usertask">
+      <documentation>这是一个连线描述</documentation>
+      <extensionElements>
+        <activiti:executionListener event="start" delegateExpression="${yyy}"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${a>3}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="7ed570a9-5b3e-4bb4-b75d-5f58d733e587" name="a &lt;= 3" sourceRef="655f8412-c8a5-4134-bc0a-f3120851e7be" targetRef="usertask2">
+      <documentation>这是一个连线描述</documentation>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${a<=3}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_myProcess">
+    <bpmndi:BPMNPlane bpmnElement="myProcess" id="BPMNPlane_myProcess">
+      <bpmndi:BPMNShape bpmnElement="655f8412-c8a5-4134-bc0a-f3120851e7be" id="BPMNShape_655f8412-c8a5-4134-bc0a-f3120851e7be">
+        <omgdc:Bounds height="40.0" width="40.0" x="80.0" y="90.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="30.0" width="30.0" x="0.0" y="95.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask" id="BPMNShape_usertask">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="b218ee66-13c9-4414-a577-d206e4a3b8e9" id="BPMNEdge_b218ee66-13c9-4414-a577-d206e4a3b8e9">
+        <omgdi:waypoint x="120.0" y="110.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="110.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="30.000000000000007"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="30.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="7ed570a9-5b3e-4bb4-b75d-5f58d733e587" id="BPMNEdge_7ed570a9-5b3e-4bb4-b75d-5f58d733e587">
+        <omgdi:waypoint x="120.0" y="110.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="110.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="190.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="17a8a5f7-1353-44c6-b0c2-2ad94911efd4" id="BPMNEdge_17a8a5f7-1353-44c6-b0c2-2ad94911efd4">
+        <omgdi:waypoint x="30.0" y="110.0"></omgdi:waypoint>
+        <omgdi:waypoint x="80.0" y="110.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,19 @@
+huawei:
+  license:
+    activate:
+      url: https://mkt.myhuaweicloud.com/api/mkp-openapi-public/global/v1/license/activate
+    heartbeat:
+      url: https://mkt.myhuaweicloud.com/api/mkp-openapi-public/global/v1/license/heartbeat
+    app:
+      key: HTBXXRU5EWRRFFTXQM3G
+      secrect: QaypwOklnQIQtsg9P9a0ah1w3gZk57W2Bm0K0FNE
+dubbo:
+  registry:
+    address:
+spring:
+  main:
+    allow-circular-references: false
+  cloud:
+    config:
+      allowOverride: true
+      overrideNone: true

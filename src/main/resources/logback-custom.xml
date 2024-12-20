@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+
+  <contextName>logback</contextName>
+
+  <if condition='property("env").contains("dev")'>
+    <then>
+      <property scope="context" name="log.level" value="DEBUG" />
+    </then>
+    <else>
+      <property scope="context" name="log.level" value="INFO" />
+    </else>
+  </if>
+
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%marker %d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <root level="${log.level}">
+    <appender-ref ref="console" />
+  </root>
+
+  <!--<logger name="com.example.demo.logback.LogbackParseTest" level="${log.level}" additivity="false">
+    <appender-ref ref="console" />
+  </logger>-->
+
+</configuration>
