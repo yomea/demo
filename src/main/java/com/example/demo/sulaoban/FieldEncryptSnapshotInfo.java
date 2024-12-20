@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
  */
 public class FieldEncryptSnapshotInfo {
 
-    private Object parameter;
+    private Object containBean;
     private Field field;
 
     private Object origin;
@@ -38,11 +38,11 @@ public class FieldEncryptSnapshotInfo {
         this.encrypt = encrypt;
     }
 
-    public Object getParameter() {
-        return parameter;
+    public Object getContainBean() {
+        return containBean;
     }
 
-    public void setParameter(Object parameter) {
-        this.parameter = parameter;
+    public void setContainBean(Object containBean) {
+        this.containBean = containBean;
     }
 }

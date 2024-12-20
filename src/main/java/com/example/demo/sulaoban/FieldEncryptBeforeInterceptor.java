@@ -3,13 +3,16 @@ package com.example.demo.sulaoban;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
+import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.Interceptor;
@@ -25,7 +28,7 @@ import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;
 
 @Intercepts({@Signature(type = ParameterHandler.class, method = "setParameters", args = {
     PreparedStatement.class})})
-public class FieldEncryptInterceptor implements Interceptor {
+public class FieldEncryptBeforeInterceptor implements Interceptor {
 
     private static final List<Class<?>> CLASS_LIST = Arrays
         .asList(Object.class, String.class, BigDecimal.class, double.class, Double.class
@@ -38,16 +41,25 @@ public class FieldEncryptInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        if (SystemConditionControl.matchMarket(MarketConstant.EU)) {
-            ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
-            MetaObject metaObject = MetaObject.forObject(parameterHandler, OBJECT_FACTORY, OBJECT_WRAPPER_FACTORY, REFLECTOR_FACTORY);
-            MappedStatement mappedStatement = (MappedStatement) metaObject.getValue("mappedStatement");
-            SqlCommandType sqlCommandType = mappedStatement.getSqlCommandType();
-            // 只处理dml语句
-            if(SqlCommandType.INSERT == sqlCommandType ||
-                SqlCommandType.UPDATE == sqlCommandType) {
-                Object parameter = parameterHandler.getParameterObject();
+        ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
+        MetaObject metaObject = MetaObject.forObject(parameterHandler, OBJECT_FACTORY, OBJECT_WRAPPER_FACTORY,
+            REFLECTOR_FACTORY);
+        MappedStatement mappedStatement = (MappedStatement) metaObject.getValue("mappedStatement");
+        SqlCommandType sqlCommandType = mappedStatement.getSqlCommandType();
+        // 只处理dml语句
+        if (SqlCommandType.INSERT == sqlCommandType ||
+            SqlCommandType.UPDATE == sqlCommandType) {
+            BoundSql boundSql = (BoundSql) metaObject.getValue("boundSql");
+            Object parameter = parameterHandler.getParameterObject();
+            try {
                 this.execEncrypt(parameter);
+                List<FieldEncryptSnapshotInfo> infos = ThreadLocalUtil.get();
+                if (Objects.nonNull(infos)) {
+                    boundSql.setAdditionalParameter(FieldEncryptBeforeInterceptor.class
+                        .getName().replace(".", "-"), infos);
+                }
+            } finally {
+                ThreadLocalUtil.remove();
             }
         }
         return invocation.proceed();
@@ -57,12 +69,12 @@ public class FieldEncryptInterceptor implements Interceptor {
         if (Objects.isNull(parameter)) {
             return;
         }
-        if(parameter instanceof Map) {
-            Map map = (Map)parameter;
+        if (parameter instanceof Map) {
+            Map map = (Map) parameter;
             List<Object> itemRepeatList = new ArrayList<>();
             map.values().forEach(item -> {
-                for(Object repeat : itemRepeatList) {
-                    if(repeat == item) {
+                for (Object repeat : itemRepeatList) {
+                    if (repeat == item) {
                         return;
                     }
                 }
@@ -115,11 +127,15 @@ public class FieldEncryptInterceptor implements Interceptor {
             // 没有值，不需要操作
             return null;
         }
-        return this.doGetEncryptVal(fieldBean, field);
+        return this.doGetEncryptVal(fieldBean, field, parameter);
     }
 
     private Object doGetEncryptVal(Object fieldBean, Field field) {
-        if(Objects.isNull(fieldBean)) {
+        return this.doGetEncryptVal(fieldBean, field, null);
+    }
+
+    private Object doGetEncryptVal(Object fieldBean, Field field, Object containBean) {
+        if (Objects.isNull(fieldBean)) {
             return null;
         }
         // 字段类型
@@ -127,45 +143,53 @@ public class FieldEncryptInterceptor implements Interceptor {
         // 只对标有注解的String类型java bean字段做加密
         if (clazz.isArray()) {
             Object[] c = (Object[]) fieldBean;
-            for(Object item : c) {
+            for (Object item : c) {
                 this.doGetEncryptVal(item, null);
             }
         } else if (Iterable.class.isAssignableFrom(clazz)) {
             Iterable c = (Iterable) fieldBean;
-            for(Object item : c) {
+            for (Object item : c) {
                 this.doGetEncryptVal(item, null);
             }
         } else if (Map.class.isAssignableFrom(clazz)) {
-            Map map = (Map)fieldBean;
+            Map map = (Map) fieldBean;
             map.values().stream().forEach(item -> {
                 this.doGetEncryptVal(item, null);
             });
         } else if (String.class.isAssignableFrom(clazz)) {
             boolean encrypt = this.isEncrypt(field);
-            return this.encryptNess( (String) fieldBean, encrypt);
+            return this.encryptNess(field, (String) fieldBean, encrypt, containBean);
         } else {
             this.process(fieldBean);
         }
         return fieldBean;
     }
 
-    private Object encryptNess(String fieldBean, boolean encrypt) {
-        if(!encrypt) {
+    private Object encryptNess(Field field, String fieldBean, boolean encrypt, Object containBean) {
+        if (!encrypt) {
             return fieldBean;
         }
-        String encryptedValue = AesSecureHelper.encryptBase64(fieldBean);
+        String encryptedValue = Base64.getEncoder().encodeToString(fieldBean.getBytes(StandardCharsets.UTF_8));
+        List<FieldEncryptSnapshotInfo> infos = ThreadLocalUtil.get();
+        if(Objects.isNull(infos)) {
+            infos = new ArrayList<>();
+            ThreadLocalUtil.set(infos);
+        }
+        FieldEncryptSnapshotInfo info = new FieldEncryptSnapshotInfo();
+        info.setContainBean(containBean);
+        info.setOrigin(fieldBean);
+        info.setEncrypt(encryptedValue);
+        info.setField(field);
+        infos.add(info);
         return encryptedValue;
     }
 
     private boolean isEncrypt(Field field) {
-        if(Objects.isNull(field)) {
+        if (Objects.isNull(field)) {
             return false;
         }
         Crypto cryptoAnnotation = field.getAnnotation(Crypto.class);
-        if (cryptoAnnotation != null) {
-            return cryptoAnnotation.encrypt();
-        }
-        return false;
+        return Objects.nonNull(cryptoAnnotation);
     }
 
     private void getFields(List<Field> fieldList, Class<?> tClass) {
