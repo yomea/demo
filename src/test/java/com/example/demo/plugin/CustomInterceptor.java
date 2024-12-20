@@ -1,4 +1,4 @@
-package com.banksteel.openerp.test;
+package com.example.demo.plugin;
 
 import com.example.demo.plugin.CustomResultSetHandler;
 import java.sql.PreparedStatement;
