@@ -30,11 +30,6 @@ import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;
     PreparedStatement.class})})
 public class FieldEncryptBeforeInterceptor implements Interceptor {
 
-    private static final List<Class<?>> CLASS_LIST = Arrays
-        .asList(Object.class, String.class, BigDecimal.class, double.class, Double.class
-            , int.class, Integer.class, long.class, Long.class, float.class, Float.class, short.class, Short.class
-            , byte.class, Byte.class, boolean.class, Boolean.class);
-
     private static final ObjectFactory OBJECT_FACTORY = new DefaultObjectFactory();
     private static final org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory OBJECT_WRAPPER_FACTORY = new DefaultObjectWrapperFactory();
     private static final ReflectorFactory REFLECTOR_FACTORY = new DefaultReflectorFactory();
@@ -83,29 +78,15 @@ public class FieldEncryptBeforeInterceptor implements Interceptor {
             });
         } else {
             this.doGetEncryptVal(parameter, null);
-//                    this.process(item);
         }
     }
 
     //只处理bean
     private void process(Object parameter) {
-        if (Objects.isNull(parameter)) {
-            return;
-        }
-        Class<?> clazz = parameter.getClass();
-        if (CLASS_LIST.contains(clazz) || clazz.getName().startsWith("java.lang")) {
-            return;
-        }
         // 只处理java bean，这种字段上才可能存在注解
-        List<Field> fieldList = this.getFieldList(clazz);
+        List<Field> fieldList = FieldReflectorUtil.reflectFields(parameter);
         this.doProcess(parameter, fieldList);
 
-    }
-
-    public List<Field> getFieldList(Class<?> clazz) {
-        List<Field> fieldList = new ArrayList<>();
-        this.getFields(fieldList, clazz);
-        return fieldList;
     }
 
     private void doProcess(Object bean, List<Field> fieldList) {
@@ -192,20 +173,5 @@ public class FieldEncryptBeforeInterceptor implements Interceptor {
         return Objects.nonNull(cryptoAnnotation);
     }
 
-    private void getFields(List<Field> fieldList, Class<?> tClass) {
 
-        if (tClass == null || tClass == Object.class || tClass.getName().startsWith("java.lang")) {
-            return;
-        }
-        Field[] fields = tClass.getDeclaredFields();
-        if (fields != null && fields.length > 0) {
-            for (Field field : fields) {
-                if (!Modifier.isStatic(field.getModifiers()) && !Modifier.isFinal(field.getModifiers())) {
-                    fieldList.add(field);
-                }
-
-            }
-        }
-        this.getFields(fieldList, tClass.getSuperclass());
-    }
 }
