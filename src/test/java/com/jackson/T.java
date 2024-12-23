@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.core.MethodParameter;
 
 /**
  * @author wuzhenhong
@@ -16,41 +19,34 @@ import java.lang.reflect.Field;
  */
 public class T {
 
-
-    public static class UserSerializer extends StdSerializer<String> {
-
-        public UserSerializer() {
-            super(String.class);
-        }
-
-        @Override
-        public void serialize(String value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-
-            gen.writeStartObject();
-            gen.writeStringField(gen.getOutputContext().getParent().getCurrentName() + "脱敏", value + "**");
-            gen.writeStringField(gen.getOutputContext().getParent().getCurrentName() + "密码", "xxxx");
-            gen.writeEndObject();
-        }
+    public void t() {
 
     }
 
+    public static void main(String[] args) throws JsonProcessingException, NoSuchMethodException {
 
-    public static void main(String[] args) throws JsonProcessingException {
+        Cat cat = new Cat();
+        cat.setName("加菲猫");
+        cat.setAge(1);
 
-        User user = new User();
-        user.setName("苏城锋");
-        user.setAge(29);
+        Cat cat1 = new Cat();
+        cat1.setName("加菲猫1号");
+        cat1.setAge(0);
 
-        Address address = new Address();
-        address.setXxx("北京天安门");
-        user.setAddress(address);
+        Cat cat2 = new Cat();
+        cat2.setName("加菲猫1号");
+        cat2.setAge(0);
 
-        com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(String.class,new UserSerializer());
-        mapper.registerModule(module);
+        List<Animal> catList = new ArrayList<>();
+        catList.add(cat1);
+        catList.add(cat2);
 
-        String json = mapper.writeValueAsString(user);
+        cat.setChildren(catList);
+
+        MethodParameter returnType = new MethodParameter(T.class.getMethod("t"), -1);
+        ThreadLocalUtil.set(returnType);
+        String json = JacksonBodyAdviceUtil.writeValueAsString(cat);
+
         System.out.println(json);
 
     }
