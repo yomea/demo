@@ -32,7 +32,7 @@ public class CustomStringSerializer extends StdSerializer<String> {
         }
         MethodParameter returnType = ThreadLocalUtil.get();
         // 在这个返回类型的注解
-        SensitiveComplex cryptoComplex = returnType.getAnnotatedElement().getAnnotation(SensitiveComplex.class);
+        SensitiveComplex cryptoComplex = returnType.getMethodAnnotation(SensitiveComplex.class);
         if (Objects.isNull(cryptoComplex)) {
             gen.writeString(value);
             return;
