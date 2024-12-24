@@ -1,25 +1,17 @@
-package com.jackson3;
+package com.example.demo.jackson.plan3;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.stereotype.Component;
 
 /**
  * @author wuzhenhong
  * @date 2024/12/23 10:47
  */
+@Component
 public class JacksonBodyAdviceUtil implements ApplicationContextAware {
 
     private static  ObjectMapper OBJECT_MAPPER;
@@ -35,6 +27,6 @@ public class JacksonBodyAdviceUtil implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        OBJECT_MAPPER = Jackson2ObjectMapperBuilder.json().applicationContext(applicationContext).build();
+        OBJECT_MAPPER = applicationContext.getBean(ObjectMapper.class);
     }
 }

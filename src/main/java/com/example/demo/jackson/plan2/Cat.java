@@ -1,5 +1,6 @@
-package com.jackson;
+package com.example.demo.jackson.plan2;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -9,6 +10,8 @@ import java.util.List;
 public class Cat extends Animal{
 
     private Integer age;
+
+    private LocalDateTime birth;
 
     private List<Animal> children;
 
@@ -26,5 +29,13 @@ public class Cat extends Animal{
 
     public void setChildren(List<Animal> children) {
         this.children = children;
+    }
+
+    public LocalDateTime getBirth() {
+        return birth;
+    }
+
+    public void setBirth(LocalDateTime birth) {
+        this.birth = birth;
     }
 }

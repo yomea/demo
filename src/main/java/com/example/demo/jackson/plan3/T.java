@@ -1,4 +1,4 @@
-package com.jackson3;
+package com.example.demo.jackson.plan3;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.ArrayList;

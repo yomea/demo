@@ -1,8 +1,11 @@
-package com.jackson3;
+package com.example.demo.jackson.plan1;
 
+import com.example.demo.jackson.plan2.Sensitive;
+import com.example.demo.jackson.plan2.SensitiveComplex;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.example.demo.jackson.plan2.ThreadLocalUtil;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Objects;
@@ -30,7 +33,7 @@ public class CustomStringSerializer extends StdSerializer<String> {
             gen.writeEndObject();
             return;
         }
-        MethodParameter returnType = ThreadLocalUtil.get();
+        MethodParameter returnType = ThreadLocalUtil.remove();
         // 在这个返回类型的注解
         SensitiveComplex cryptoComplex = returnType.getMethodAnnotation(SensitiveComplex.class);
         if (Objects.isNull(cryptoComplex)) {

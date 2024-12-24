@@ -1,4 +1,4 @@
-package com.jackson;
+package com.example.demo.jackson.plan2;
 
 import org.springframework.core.MethodParameter;
 
@@ -9,7 +9,7 @@ import org.springframework.core.MethodParameter;
 public class ThreadLocalUtil {
 
     private static final ThreadLocal<MethodParameter>
-    THREAD_LOCAL = new ThreadLocal<>();
+        THREAD_LOCAL = new ThreadLocal<>();
 
     public static void set(MethodParameter returnType) {
         THREAD_LOCAL.set(returnType);
@@ -19,7 +19,9 @@ public class ThreadLocalUtil {
         return THREAD_LOCAL.get();
     }
 
-    public static void remove() {
-         THREAD_LOCAL.remove();
+    public static MethodParameter remove() {
+        MethodParameter methodParameter = THREAD_LOCAL.get();
+        THREAD_LOCAL.remove();
+        return methodParameter;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.jackson2;
+package com.example.demo.jackson.plan1;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;

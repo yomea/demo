@@ -1,14 +1,7 @@
-package com.jackson;
+package com.example.demo.jackson.plan2;
 
-import com.example.demo.Address;
-import com.example.demo.User;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import java.io.IOException;
-import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.core.MethodParameter;
@@ -28,14 +21,17 @@ public class T {
         Cat cat = new Cat();
         cat.setName("加菲猫");
         cat.setAge(1);
+        cat.setBirth(LocalDateTime.of(1990, 10, 2, 10, 10));
 
         Cat cat1 = new Cat();
         cat1.setName("加菲猫1号");
         cat1.setAge(0);
+        cat1.setBirth(LocalDateTime.now());
 
         Cat cat2 = new Cat();
-        cat2.setName("加菲猫1号");
+        cat2.setName("加菲猫2号");
         cat2.setAge(0);
+        cat2.setBirth(LocalDateTime.now().plusDays(-1));
 
         List<Animal> catList = new ArrayList<>();
         catList.add(cat1);

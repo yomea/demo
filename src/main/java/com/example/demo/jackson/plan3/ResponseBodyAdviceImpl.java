@@ -1,6 +1,5 @@
-package com.example.demo.jackson2;
+package com.example.demo.jackson.plan3;
 
-import com.jackson.ThreadLocalUtil;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.springframework.core.MethodParameter;
@@ -16,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @date 2024/12/12 8:22
  */
 @ControllerAdvice()
-public class ResponseBodyAdviceImpl2 implements ResponseBodyAdvice<Object> {
+public class ResponseBodyAdviceImpl implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -28,8 +27,20 @@ public class ResponseBodyAdviceImpl2 implements ResponseBodyAdvice<Object> {
         Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
         ServerHttpResponse response) {
 
-        ThreadLocalUtil.set(returnType);
-        return body;
+        try (OutputStream outputStream = response.getBody()) {
+            ThreadLocalUtil.set(returnType);
+            String json = JacksonBodyAdviceUtil.writeValueAsString(body);
+            response.getHeaders().add("Content-Type", selectedContentType.toString());
+            // 直接将json字符串写出
+            outputStream.write(json.getBytes());
+            response.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ThreadLocalUtil.remove();
+        }
+        // 返回null，让spring框架不要再处理返回值
+        return null;
     }
 
 }

@@ -1,11 +1,8 @@
-package com.example.demo.jackson2;
+package com.example.demo.jackson.plan2;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.jackson.Sensitive;
-import com.jackson.SensitiveComplex;
-import com.jackson.ThreadLocalUtil;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Objects;

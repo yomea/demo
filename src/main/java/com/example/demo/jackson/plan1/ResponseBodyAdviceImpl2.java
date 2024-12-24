@@ -1,7 +1,6 @@
-package com.jackson3;
+package com.example.demo.jackson.plan1;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import com.example.demo.jackson.plan2.ThreadLocalUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -15,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @date 2024/12/12 8:22
  */
 @ControllerAdvice()
-public class ResponseBodyAdviceImpl implements ResponseBodyAdvice<Object> {
+public class ResponseBodyAdviceImpl2 implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -26,21 +25,10 @@ public class ResponseBodyAdviceImpl implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
         Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
         ServerHttpResponse response) {
-
-        try (OutputStream outputStream = response.getBody()) {
-            ThreadLocalUtil.set(returnType);
-            String json = JacksonBodyAdviceUtil.writeValueAsString(body);
-            response.getHeaders().add("Content-Type", selectedContentType.toString());
-            // 直接将json字符串写出
-            outputStream.write(json.getBytes());
-            response.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            ThreadLocalUtil.remove();
-        }
-        // 返回null，让spring框架不要再处理返回值
-        return null;
+        // 将参数返回类型保存到线程上下文中，通常调用到这里，接下来就是调用对应的序列化方法写出去了，一般不会发生报错
+        // 所以在对应的序列化工具里remove即可
+        ThreadLocalUtil.set(returnType);
+        return body;
     }
 
 }
