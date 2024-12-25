@@ -23,7 +23,6 @@ public class JacksonBodyAdviceUtil {
     static {
         OBJECT_MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         SimpleModule module = new SimpleModule();
-        // 然后这个传方法值，可以通过线程上下文传过去，这里只是demo就这么写了，得优化的
         module.addSerializer(String.class, new CustomStringSerializer());
         module.addDeserializer(LocalDate.class,
             new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
