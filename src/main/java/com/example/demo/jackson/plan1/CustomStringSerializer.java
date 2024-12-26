@@ -2,20 +2,26 @@ package com.example.demo.jackson.plan1;
 
 import com.example.demo.jackson.plan2.Sensitive;
 import com.example.demo.jackson.plan2.SensitiveComplex;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.example.demo.jackson.plan2.ThreadLocalUtil;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatVisitorWrapper;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.Objects;
 import org.springframework.core.MethodParameter;
 import org.springframework.util.ReflectionUtils;
 
-public class CustomStringSerializer extends StdSerializer<String> {
+public class CustomStringSerializer extends StdScalarSerializer<String> {
 
     public CustomStringSerializer() {
-        super(String.class);
+        super(String.class, false);
     }
 
     @Override
@@ -33,7 +39,7 @@ public class CustomStringSerializer extends StdSerializer<String> {
             gen.writeEndObject();
             return;
         }
-        MethodParameter returnType = ThreadLocalUtil.remove();
+        MethodParameter returnType = ThreadLocalUtil.get();
         // 在这个返回类型的注解
         SensitiveComplex cryptoComplex = returnType.getMethodAnnotation(SensitiveComplex.class);
         if (Objects.isNull(cryptoComplex)) {
@@ -55,5 +61,28 @@ public class CustomStringSerializer extends StdSerializer<String> {
                 break;
             }
         }
+    }
+
+    @Override
+    public boolean isEmpty(SerializerProvider prov, String value) {
+        return value == null || value.isEmpty();
+    }
+
+    @Override
+    public final void serializeWithType(String value, JsonGenerator gen, SerializerProvider provider,
+        TypeSerializer typeSer) throws IOException
+    {
+        gen.writeString(value);
+    }
+
+    @Override
+    public JsonNode getSchema(SerializerProvider provider, Type typeHint) {
+        return createSchemaNode("string", true);
+    }
+
+    @Override
+    public void acceptJsonFormatVisitor(
+        JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {
+        visitStringFormat(visitor, typeHint);
     }
 }
