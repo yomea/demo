@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @author wuzhenhong
  * @date 2022/8/5 15:10
  */
-@Service
+@Service("testService")
 public class TestService implements ApplicationContextAware, InitializingBean {
 
     @Value("${huawei.license.activate.url}")

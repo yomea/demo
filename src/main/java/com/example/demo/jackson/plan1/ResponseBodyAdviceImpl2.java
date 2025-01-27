@@ -25,8 +25,6 @@ public class ResponseBodyAdviceImpl2 implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
         Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
         ServerHttpResponse response) {
-        // 将参数返回类型保存到线程上下文中，通常调用到这里，接下来就是调用对应的序列化方法写出去了，一般不会发生报错
-        // 所以在对应的序列化工具里remove即可
         ThreadLocalUtil.set(returnType);
         return body;
     }

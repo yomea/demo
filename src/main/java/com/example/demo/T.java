@@ -3,7 +3,10 @@ package com.example.demo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Data;
+import org.apache.ibatis.ognl.Ognl;
 
 /**
  * @author wuzhenhong
@@ -29,5 +32,19 @@ public class T {
         User user = new User();
         user.setId(1L);
         System.out.println(new Gson().toJson(user));
+
+        XX xx= new XX();
+        xx.setA("a");
+        xx.setB(1L);
+        Map<String, Object> context = new HashMap<>();
+        context.put("a", xx);
+        Object value = Ognl.getValue("a.a + a.b", context);
+        System.out.println(value);
+    }
+
+    @Data
+    public static class XX {
+        private String a;
+        private Long b;
     }
 }

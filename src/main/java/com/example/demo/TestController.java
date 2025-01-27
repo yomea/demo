@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author wuzhenhong
  * @date 2024/12/12 8:40
  */
-@RestController
+@RestController(value = "sdf")
 public class TestController {
 
     @GetMapping("/test")
