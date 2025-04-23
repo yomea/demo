@@ -48,6 +48,10 @@ public class UrlFileSortDemo {
                 // 检测最后一个换行符位置
                 // 因为分块，有可能最后切割的行被折断了
                 long endPos = this.findLastNewLine(buffer) + position;
+                // 如果分割的块没有换行符号？怎么处理，10M应该不可能吧
+                if(position == endPos) {
+
+                }
 
                 // 处理当前分块的有效数据
                 String chunkFilePath = this.processChunk(buffer, index++);
