@@ -1,14 +1,17 @@
+/*
 package com.example.demo;
 
 import com.alibaba.fastjson.JSON;
 import java.lang.reflect.Field;
 import sun.misc.Unsafe;
 
+*/
 /**
  * @author: sucf
  * @date: 2022/10/9 15:20
  * @description:
- */
+ *//*
+
 public class UnsafeDemo {
 
     public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException {
@@ -53,4 +56,4 @@ public class UnsafeDemo {
         unsafeField.setAccessible(true);
         return (Unsafe) unsafeField.get(null);
     }
-}
+}*/

@@ -1,11 +1,9 @@
 package com.example.demo.test;
 
-import java.lang.instrument.Instrumentation;
 import java.lang.management.ManagementFactory;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
-import sun.instrument.InstrumentationImpl;
 
 /**
  * @author wuzhenhong

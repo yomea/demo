@@ -25,11 +25,11 @@ public class DelFeeApplyTTTTT {
     @Test
     public void t() {
 
-        String s = "9850";
+        String s = "16927,17028";
         Arrays.stream(s.split(",")).forEach(id -> {
             Map<String, Object> pa = new HashMap<>();
             pa.put("id", id);
-            doPostRequest("http://erp.sxcigtrade.com/platform/api", "delete_fm_fee_apply", "vqh0G4gj", pa);
+            doPostRequest("http://erp.sxcigtrade.com/platform/api", "delete_fm_fee_apply", "sbPiP8u7", pa);
         });
 
     }

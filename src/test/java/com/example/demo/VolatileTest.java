@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import java.util.concurrent.CountDownLatch;
-import sun.misc.Contended;
 
 public class VolatileTest {
 
